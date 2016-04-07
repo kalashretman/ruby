@@ -1,8 +1,8 @@
 class Calc
   def check(a, b)
-
+  # do check type
   end
-  
+  # do for Integer
   def plus(a, b)
     if a.integer? && b.integer?
       p a + b
@@ -28,4 +28,5 @@ end
 
 n = Calc.new
 
-n.minus 1, 'fsdfsd'
+n.plus 1,6
+n.minus 1,'fsdfsd'
