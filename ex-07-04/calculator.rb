@@ -1,11 +1,13 @@
 #проверка типов
 class Factory
-  	def check_type a, b
+  	def check_type(a, b)
     	type_a = a.class
     	type_b = b.class
-    	if a != b
+
+    	if type_a != type_b
       		raise "Переменные разных типов"
     	end
+
     	return type_a
   	end  
 end
@@ -14,10 +16,12 @@ end
 class Performance
 	def select_operation_class type
 		case type
-			when String
-				return String_operation
+			when String 
+				p String_operation
 			when Numeric
-				return Numeric_operation
+				p Numeric_operation
+			when Fixnum
+				p Numeric_operation	
 			else
 				raise 'this type don\'t support'					
 		end
@@ -125,14 +129,13 @@ end
 
 #точка входа 
 class Calculator
-  	def initialize a, b, oper
-  		@a = a
-  		@b = b
-  		@oper = oper
-  	end
 
-  	factory = Factory.new
-  	rslt = factory.check_type @a, @b
+ a=1
+ b=3
+ oper = "+"
+
+  	factory = Factory.new  	
+  	rslt = factory.check_type(a, b)
 
 	if rslt 
 		prfmns = Performance.new
@@ -141,8 +144,8 @@ class Calculator
 
 	operat = cls_oper.new @a, @b, @oper
 	qw = operat.check_operation @oper
-	puts qw @a, @b 
+
 end
 
-s = Calculator.new.class 
-puts s.new 'as', 'df', "+"
+s = Calculator.new 
+puts s.new
