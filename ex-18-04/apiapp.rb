@@ -4,7 +4,7 @@ require 'sinatra/json'
 require 'mongoid'
 require 'dotenv'
 require 'sinatra-initializers'
-require './models/calculation'
+require './models/Image'
 
 Dotenv.load
 
@@ -15,20 +15,20 @@ class Lesson < Sinatra::Application
     set show_exceptions: false
   end
 
-  get '/last_calculation' do
-    calculation = Calculation.find params['id']
-    json({ calculation:
+  get '/last_image' do
+    calculation = Image.find params['id']
+    json({ your_image:
       { id: calculation.id.to_s, result: calculation.result }
     })
   end
 
-  post '/calculation' do
-    param :param1,    Float,  required: true
-    param :param2,    Float,  required: true
-    param :operation, String, in: ['plus', 'minus']
+  post '/image' do
+    param :url,       String,  required: true
+    param :height,    Float,   required: true
+    param :width,     Float,   required: true
+    param :oper, 	  String,  in: ['resize', 'delete']  #'delete' soon
 
-    result = params['param1'] + params['param2']
-
+    
     calculation_params = params.merge({ 'result' => result })
     calculation = Calculation.create! calculation_params
 
