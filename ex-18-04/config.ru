@@ -1,6 +1,6 @@
-require './lesson'
+require './apiapp'
 require 'rack/contrib'
 
 use Rack::PostBodyContentTypeParser
 
-run Lesson
+run Apiapp

@@ -1,3 +1,4 @@
+require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/param'
 require 'sinatra/json'
@@ -8,18 +9,15 @@ require './models/Image'
 
 Dotenv.load
 
-class Lesson < Sinatra::Application
+get '/last_image' do
+  "kdhfgkjdhfjk"
+end
+
+class Apiapp < Sinatra::Application
   register Sinatra::Initializers
   configure do
     set :raise_sinatra_param_exceptions, true
     set show_exceptions: false
-  end
-
-  get '/last_image' do
-    calculation = Image.find params['id']
-    json({ your_image:
-      { id: calculation.id.to_s, result: calculation.result }
-    })
   end
 
   post '/image' do
@@ -28,12 +26,10 @@ class Lesson < Sinatra::Application
     param :width,     Float,   required: true
     param :oper, 	  String,  in: ['resize', 'delete']  #'delete' soon
 
-    
-    calculation_params = params.merge({ 'result' => result })
-    calculation = Calculation.create! calculation_params
+    last_image = Image.create! params
 
-    json({ calculation:
-      { id: calculation.id.to_s, result: result }
+    json({ image:
+      { id: last_image.id.to_s, result: result }
     })
   end
 

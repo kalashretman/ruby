@@ -6,3 +6,4 @@ class Image
   field :oper, type: String  
   field :height, type: Float
   field :width, type: Float
+end  
